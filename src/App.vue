@@ -1,6 +1,10 @@
 <template>
   <Navbar />
-  <router-view />
+  <div class="container is-max-desktop px-2 py-5">
+    <router-view />
+  </div>
+
+
 </template>
 
 <script setup>
