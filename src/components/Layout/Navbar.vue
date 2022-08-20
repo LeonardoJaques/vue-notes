@@ -1,22 +1,28 @@
 <template>
-  <nav class="navbar is-success is-fixed-top" role=" navigation" aria-label="main navigation">
+  <nav class="navbar is-success is-fixed-top" role=" navigation"
+    aria-label="main navigation">
     <div class="container is-max-desktop px-2">
       <div class="navbar-brand">
         <div class="navbar-item is-size-4 is-family-monospace">
           Notess
         </div>
-        <a @click.prevent="showMobileNav = !showMobileNav" class="navbar-burger" :class="{ 'is-active': showMobileNav }"
-          aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a @click.prevent="showMobileNav = !showMobileNav" class="navbar-burger"
+          :class="{ 'is-active': showMobileNav }" aria-label="menu"
+          aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': showMobileNav }">
+      <div id="navbarBasicExample" class="navbar-menu"
+        :class="{ 'is-active': showMobileNav }">
         <div class="navbar-end">
-          <router-link class="navbar-item" active-class="is-active" to="/">Notes</router-link>
-          <router-link class="navbar-item" to="/stats">Stats</router-link>
+          <router-link @click="showMobileNav = false" class="navbar-item"
+            active-class="is-active" to="/">Notes</router-link>
+          <router-link @click="showMobileNav = false" class="navbar-item"
+            to="/stats">
+            Stats</router-link>
         </div>
       </div>
     </div>
