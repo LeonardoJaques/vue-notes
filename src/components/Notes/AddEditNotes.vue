@@ -7,7 +7,7 @@
         class="textarea"
         @input="$emit('update:modelValue', modelValue)"
           placeholder="Add a new note"
-          ref="newNoteRef" />
+          ref="textareaRef" />
       </div>
     </div>
 
@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+import { ref } from "@vue/reactivity"
+
 
 const props = defineProps({
   modelValue: {
@@ -29,4 +31,12 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['update:modelValue'])
+const textareaRef = ref(null)
+
+const focusTextarea = () => {
+  textareaRef.value.focus()
+}
+defineExpose({
+  focusTextarea
+})
 </script>
