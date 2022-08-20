@@ -18,8 +18,8 @@
 
       </div>
     </div>
-    <Note v-for="note in notes" :key="note.id" :note="note"
-      @deleteClicked="deleteNote" />
+    <Note v-for="note in storeNotes.notes" :key="note.id" :note="note"
+     />
   </div>
 
 </template>
@@ -27,37 +27,21 @@
 <script setup>
 import { ref } from "@vue/reactivity";
 import Note from "@/components/Notes/Note.vue";
+import { useStoreNotes } from "@/store/StoreNotes";
 
 
 
-
+const storeNotes = useStoreNotes()
 const newNote = ref('')
 const newNoteRef = ref(null)
 
-const notes = ref([
-  {
-    id: "id1",
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, modi. Vitae, reiciendis. Atque dicta nam eligendi fuga sed magnam illo, officia consectetur perspiciatis? Cum, repellat quibusdam dolorem doloribus doloremque voluptas!",
-  },
-  {
-    id: "id2",
-    content: "This is shorter note!"
-  },
-])
 const addNote = () => {
-  let currenteDate = new Date().getTime(),
-    id = currenteDate.toString()
-  let note = {
-    id,
-    content: newNote.value,
-  }
-  notes.value.unshift(note)
+
+  storeNotes.addNote(newNote.value)
   newNote.value = ""
   newNoteRef.value.focus()
 }
-const deleteNote = (idToDelete) => {
-  notes.value = notes.value.filter((note) => note.id !== idToDelete)
-}
+
 </script>
 
 <style  scoped>

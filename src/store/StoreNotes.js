@@ -7,7 +7,7 @@ export const useStoreNotes = defineStore("StoreNotes", {
         {
           id: "id1",
           content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, modi. Vitae, reiciendis. Atque dicta nam eligendi fuga sed magnam illo, officia consectetur perspiciatis? Cum, repellat quibusdam dolorem doloribus doloremque voluptas!",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, modi. Vitae, reiciendis. Atque dicta nam eligendi fuga sed magnam illo, officia consectetur perspiciatis? ",
         },
         {
           id: "id2",
@@ -15,5 +15,19 @@ export const useStoreNotes = defineStore("StoreNotes", {
         },
       ],
     };
+  },
+  actions: {
+    addNote(newNoteContent) {
+      let currenteDate = new Date().getTime(),
+        id = currenteDate.toString();
+      let note = {
+        id,
+        content: newNoteContent,
+      };
+      this.notes.unshift(note);
+    },
+    deleteNote(idToDelete) {
+      this.notes = this.notes.filter((note) => note.id !== idToDelete);
+    },
   },
 });
