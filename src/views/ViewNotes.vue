@@ -20,22 +20,21 @@
 import Note from "@/components/Notes/Note.vue";
 import { useStoreNotes } from "@/store/StoreNotes";
 import AddEditNotesVue from "@/components/Notes/AddEditNotes.vue";
-import { ref, watch } from "vue";
+import { ref } from "@vue/reactivity";
+
+import { useWatchCharacters } from "@/use/useWatchCharacters"
 
 const storeNotes = useStoreNotes()
 const newNote = ref('')
 const addEditNoteRef = ref(null)
+useWatchCharacters(newNote)
 
 const addNote = () => {
   storeNotes.addNote(newNote.value)
   newNote.value = ""
   addEditNoteRef.value.focusTextarea()
 }
-watch(newNote, (newValue) => {
-  if (newValue.length === 100) {
-    alert("Only 100 characters allowed")
-  }
-})
+
 
 </script>
 

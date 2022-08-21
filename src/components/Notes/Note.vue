@@ -1,7 +1,7 @@
 <template>
   <div class="card mb-4">
-    <div class="card-content">
-      <div class="content">
+    <div class="card-content ">
+      <div class="content breakAll">
         {{ note.content }}
         <div class="has-text-right has-text-grey-light mt-2">
           <small>{{ characterLength }} </small>
@@ -37,3 +37,8 @@ const storeNotes = useStoreNotes();
 
 </script>
 
+<style scoped>
+.breakAll {
+  word-break: break-all;
+}
+</style>
