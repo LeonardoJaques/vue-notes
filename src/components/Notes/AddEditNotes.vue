@@ -5,7 +5,8 @@
       <div class="control">
         <textarea v-model="modelValue" class="textarea"
           @input="$emit('update:modelValue', modelValue)"
-          :placeholder="placeholder" ref="textareaRef" v-autofocus />
+          :placeholder="placeholder" ref="textareaRef" v-autofocus
+          maxlength="100" />
       </div>
     </div>
 
@@ -20,6 +21,7 @@
 
 <script setup>
 import { ref } from "@vue/reactivity"
+import { vAutofocus } from "../../directives/vAutofocus";
 
 
 const props = defineProps({
@@ -48,11 +50,5 @@ const focusTextarea = () => {
 defineExpose({
   focusTextarea
 })
-
-const vAutofocus = {
-  mounted: (element) => {
-    element.focus()
-  }
-}
 
 </script>
