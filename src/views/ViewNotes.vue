@@ -29,10 +29,16 @@ import Note from "@/components/Notes/Note.vue";
 import { useStoreNotes } from "@/store/StoreNotes";
 import AddEditNotesVue from "@/components/Notes/AddEditNotes.vue";
 import { ref } from "@vue/reactivity";
-
 import { useWatchCharacters } from "@/use/useWatchCharacters"
+import { onMounted } from 'vue';
 
-const storeNotes = useStoreNotes()
+
+const storeNotes = useStoreNotes();
+
+onMounted(() => {
+  storeNotes.getNotes()
+})
+
 const newNote = ref('')
 const addEditNoteRef = ref(null)
 useWatchCharacters(newNote)
@@ -46,5 +52,3 @@ const addNote = () => {
 
 </script>
 
-<style  scoped>
-</style>
