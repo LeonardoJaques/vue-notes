@@ -9,7 +9,11 @@
 
       </template>
     </AddEditNotesVue>
-    <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
+    <progress v-if="!storeNotes.notesLoaded"
+      class="progress is-large is-success" max="100" />
+    <template v-else>
+      <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
+    </template>
 
   </div>
 

@@ -18,10 +18,12 @@ export const useStoreNotes = defineStore("StoreNotes", {
   state: () => {
     return {
       notes: [],
+      notesLoaded: false,
     };
   },
   actions: {
     async getNotes() {
+      this.notesLoaded = false;
       onSnapshot(notesCollectionQuery, (querySnapshot) => {
         let notes = [];
         querySnapshot.forEach((doc) => {
@@ -32,7 +34,9 @@ export const useStoreNotes = defineStore("StoreNotes", {
           };
           notes.push(note);
         });
+
         this.notes = notes;
+        this.notesLoaded = true;
       });
     },
     async addNote(newNoteContent) {
