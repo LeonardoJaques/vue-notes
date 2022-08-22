@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+console.log();
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6MaAeJf-GieBsVELrTQr3hl__OCEPVV0",
+  apiKey: import.meta.env.VITE_APIKEY,
   authDomain: "notess-7cbfa.firebaseapp.com",
   projectId: "notess-7cbfa",
   storageBucket: "notess-7cbfa.appspot.com",
