@@ -11,7 +11,12 @@ import {
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
-const notesCollectionRef = collection(db, "notes");
+const notesCollectionRef = collection(
+  db,
+  "users",
+  "wgzot6TLbMSiux27JmKRj7vaKKD3",
+  "notes"
+);
 const notesCollectionQuery = query(notesCollectionRef, orderBy("date", "desc"));
 
 export const useStoreNotes = defineStore("StoreNotes", {
