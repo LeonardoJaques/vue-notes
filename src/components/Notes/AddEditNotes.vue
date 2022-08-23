@@ -3,8 +3,8 @@
     <label class="label has-text-white" v-if="label">{{ label }}</label>
     <div class="field">
       <div class="control">
-        <textarea v-model="modelValue" class="textarea"
-          @input="$emit('update:modelValue', modelValue)"
+        <textarea :value="modelValue" class="textarea"
+          @input="$emit('update:modelValue', $event.target.value)"
           :placeholder="placeholder" ref="textareaRef" v-autofocus
           maxlength="100" />
       </div>
