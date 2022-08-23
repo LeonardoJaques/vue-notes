@@ -10,14 +10,11 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
+import { useStoreAuth } from "./StoreAuth";
 
-const notesCollectionRef = collection(
-  db,
-  "users",
-  "wgzot6TLbMSiux27JmKRj7vaKKD3",
-  "notes"
-);
-const notesCollectionQuery = query(notesCollectionRef, orderBy("date", "desc"));
+let notesCollectionRef;
+let notesCollectionQuery;
+let getNotesSnapshot = null;
 
 export const useStoreNotes = defineStore("StoreNotes", {
   state: () => {
@@ -27,9 +24,15 @@ export const useStoreNotes = defineStore("StoreNotes", {
     };
   },
   actions: {
+    init() {
+      const storeAuth = useStoreAuth();
+      notesCollectionRef = collection(db, "users", storeAuth.user.id, "notes");
+      notesCollectionQuery = query(notesCollectionRef, orderBy("date", "desc"));
+      this.getNotes();
+    },
     async getNotes() {
       this.notesLoaded = false;
-      onSnapshot(notesCollectionQuery, (querySnapshot) => {
+      getNotesSnapshot = onSnapshot(notesCollectionQuery, (querySnapshot) => {
         let notes = [];
         querySnapshot.forEach((doc) => {
           let note = {
@@ -58,6 +61,10 @@ export const useStoreNotes = defineStore("StoreNotes", {
     },
     async updateNotes(id, content) {
       await updateDoc(doc(notesCollectionRef, id), { content });
+    },
+    clearNotes() {
+      this.notes = [];
+      getNotesSnapshot && getNotesSnapshot(); // unsubscribe from any active listener
     },
   },
   getters: {
